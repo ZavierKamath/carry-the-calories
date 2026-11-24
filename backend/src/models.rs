@@ -6,6 +6,7 @@ use uuid::Uuid;
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct NewLog {
     pub name: String,
+    pub datetime: DateTime<Utc>,
     pub calories: f64,
     pub protein: f64,
     pub grams: Option<f64>
@@ -15,6 +16,7 @@ pub struct NewLog {
 pub struct Log {
     pub id: Uuid,
     pub name: String,
+    pub datetime: DateTime<Utc>,
     pub calories: f64,
     pub protein: f64,
     pub grams: Option<f64>
@@ -22,15 +24,17 @@ pub struct Log {
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct NewDay {
-    pub date: DateTime<Utc>,
+    pub datetime: DateTime<Utc>,
     pub logs: Vec<Log>
 }
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct Day {
     pub id: Uuid,
-    pub date: DateTime<Utc>,
-    pub logs: Vec<Log>
+    pub datetime: DateTime<Utc>,
+    pub logs: Vec<Log>,
+    pub calories: f64,
+    pub protein: f64
 }
 
 
@@ -51,6 +55,7 @@ pub struct Ingredient {
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct NewRecipe {
+    pub datetime: DateTime<Utc>,
     pub ingredients: Vec<Ingredient>,
     pub calories_p100g: f64,
     pub protein_p100g: f64,
@@ -59,6 +64,7 @@ pub struct NewRecipe {
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct Recipe {
     pub id: Uuid,
+    pub datetime: DateTime<Utc>,
     pub ingredients: Vec<Ingredient>,
     pub calories_p100g: f64,
     pub protein_p100g: f64,
