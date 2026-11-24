@@ -2,11 +2,12 @@ mod models;
 
 use sqlx::PgPool;
 use axum::{
- Json, Router, extract::{
-     Path, State, ws::{
-         Message, WebSocket, WebSocketUpgrade
-     }
-  }, response::IntoResponse, routing::{get, post}
+ Json, Router,
+ extract::{
+     Path, State,
+     ws::{Message, WebSocket, WebSocketUpgrade}
+  },
+  response::IntoResponse, routing::{get, post}
 };
 use uuid::Uuid;
 use models::{
@@ -26,66 +27,48 @@ use dotenvy;
 pub async fn post_log(
     State(db): State<PgPool>, Json(new_log): Json<NewLog>
 ) -> Json<Log> {
-    let item = Log {
-        id: Uuid::new_v4(),
-        datetime: new_log.datetime,
-        name: new_log.name,
-        calories: new_log.calories,
-        protein: new_log.protein,
-        grams: None
-    };
-    Json(item)
+    let new_uuid = Uuid::new_v4();
+    Json(sqlx::query_as(
+        "INSERT INTO logs (id, datetime, name, calories, protein, grams)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *"
+    ).bind(new_uuid).bind(new_log.datetime).bind(new_log.name)
+    .bind(new_log.calories).bind(new_log.protein).bind(new_log.grams)
+    .fetch_one(&db).await.unwrap())
 }
 
 pub async fn get_log(
     State(db): State<PgPool>,
     Path(id): Path<Uuid>
 ) -> Json<Log> {
-    let item = Log {
-        id,
-        datetime: Utc::now(),
-        name: String::from("test"),
-        calories: 1.2_f64,
-        protein: 3.4_f64,
-        grams: None
-    };
-    Json(item)
+    Json(sqlx::query_as("SELECT * FROM logs WHERE id=$1")
+        .bind(id).fetch_one(&db).await.unwrap())
 }
 
 pub async fn get_logs(
     State(db): State<PgPool>,
     Json(datetime): Json<DateTime<Utc>>
 ) -> Json<Vec<Log>> {
-    let item = Log {
-        id: Uuid::new_v4(),
-        datetime,
-        name: String::from("test"),
-        calories: 1.2_f64,
-        protein: 3.4_f64,
-        grams: None
-    };
-    Json(vec![item])
+    Json(sqlx::query_as("SELECT * FROM logs WHERE datetime=$1")
+        .bind(datetime).fetch_all(&db).await.unwrap())
 }
 
 pub async fn put_log(
     State(db): State<PgPool>,
     Json(updated_log): Json<Log>
 ) -> Json<Log> {
-    Json(updated_log)
+    Json(sqlx::query_as(
+        "INSERT INTO logs (id, datetime, name, calories, protein, grams)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *"
+    ).bind(updated_log.id).bind(updated_log.datetime).bind(updated_log.name)
+    .bind(updated_log.calories).bind(updated_log.protein).bind(updated_log.grams)
+    .fetch_one(&db).await.unwrap())
 }
 
-pub async fn del_log(
-    State(db): State<PgPool>,
-    Path(id): Path<Uuid>
-) -> Json<Log> {
-    Json(Log {
-        id,
-        datetime: Utc::now(),
-        name: String::from("test"),
-        calories: 1.2_f64,
-        protein: 3.4_f64,
-        grams: None
-    })
+pub async fn del_log(State(db): State<PgPool>, Path(id): Path<Uuid>) {
+    sqlx::query("DELETE FROM logs WHERE id=$1")
+        .bind(id).execute(&db).await.unwrap();
 }
 
 pub async fn ws_upgrade(ws: WebSocketUpgrade) -> impl IntoResponse {
