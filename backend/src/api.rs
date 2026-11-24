@@ -1,3 +1,5 @@
+mod models;
+
 use sqlx::PgPool;
 use axum::{
  Json, Router, extract::{
@@ -7,9 +9,6 @@ use axum::{
   }, response::IntoResponse, routing::{get, post}, serve::Listener
 };
 use uuid::Uuid;
-
-mod models;
-
 use models::{
     NewLog,
     Log,
@@ -23,22 +22,34 @@ use models::{
 
 pub async fn post_log(
     State(db): State<PgPool>, Json(new_log): Json<NewLog>
-) -> Json<Log> {pass}
+) -> Json<Log> {
+    println!("[post log] {:?}", new_log);
+    pass
+}
 
 pub async fn get_logs(
     State(db): State<PgPool>,
     Json(datetime): Json<DateTime>
-) -> Json<Vec<Log>> {pass}
+) -> Json<Vec<Log>> {
+    println!("[get logs] {:?}", datetime);
+    pass
+}
 
 pub async fn put_log(
     State(db): State<PgPool>,
     Json(updated_log): Json<Log>
-) -> Json<Log> {pass}
+) -> Json<Log> {
+    println!("[put log] {:?}", updated_log);
+    pass
+}
 
 pub async fn del_log(
     State(db): State<PgPool>,
     id: Uuid
-) -> Json<Log> {pass}
+) -> Json<Log> {
+    println!("[delete log] {:?}", id);
+    pass
+}
 
 pub async fn ws_upgrade(ws: WebSocketUpgrade) -> impl IntoResponse {
     ws.on_upgrade(audio)
