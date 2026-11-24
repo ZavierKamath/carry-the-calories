@@ -5,8 +5,8 @@ use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct NewLog {
-    pub name: String,
     pub datetime: DateTime<Utc>,
+    pub name: String,
     pub calories: f64,
     pub protein: f64,
     pub grams: Option<f64>
@@ -15,8 +15,8 @@ pub struct NewLog {
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct Log {
     pub id: Uuid,
-    pub name: String,
     pub datetime: DateTime<Utc>,
+    pub name: String,
     pub calories: f64,
     pub protein: f64,
     pub grams: Option<f64>
