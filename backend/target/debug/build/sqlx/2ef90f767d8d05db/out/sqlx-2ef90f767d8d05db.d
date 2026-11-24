@@ -1,0 +1,12 @@
+/home/zav/dev/ctc/backend/target/debug/build/sqlx/2ef90f767d8d05db/out/sqlx-2ef90f767d8d05db.d: /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/lib.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/any/mod.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/macros/mod.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/ty_match.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/spec_error.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/lib.md /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/macros/test.md /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/any/install_drivers_note.md
+
+/home/zav/dev/ctc/backend/target/debug/build/sqlx/2ef90f767d8d05db/out/libsqlx-2ef90f767d8d05db.rmeta: /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/lib.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/any/mod.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/macros/mod.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/ty_match.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/spec_error.rs /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/lib.md /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/macros/test.md /home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/any/install_drivers_note.md
+
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/lib.rs:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/any/mod.rs:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/macros/mod.rs:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/ty_match.rs:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/spec_error.rs:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/lib.md:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/macros/test.md:
+/home/zav/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-0.9.1/src/any/install_drivers_note.md:

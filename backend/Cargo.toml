@@ -1,0 +1,16 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "api"
+path = "src/api.rs"
+
+[dependencies]
+axum = { version = "0.8.9", features = ["ws"] }
+chrono = { version = "0.4.45", features = ["serde"] }
+serde = { version = "1.0.229", features = ["derive"] }
+sqlx = { version = "0.7", features = ["runtime-tokio", "tls-rustls", "postgres", "chrono"] }
+tokio = { version = "1.54.1", features = ["full"] }
+uuid = { version = "1.29.3", features = ["v7", "serde"] }
