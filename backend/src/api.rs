@@ -1,5 +1,4 @@
-mod models;
-
+use parakeet_rs::ParakeetTDT;
 use sqlx::PgPool;
 use axum::{
  Json, Router,
@@ -10,7 +9,7 @@ use axum::{
   response::IntoResponse, routing::{get, post}
 };
 use uuid::Uuid;
-use models::{
+use backend::models::{
     NewLog,
     Log,
     NewDay,
@@ -20,6 +19,7 @@ use models::{
     Ingredient,
     NewIngredient
 };
+use backend::utils::{transcribe, build_model};
 use chrono::{DateTime, Utc};
 use dotenvy;
 
@@ -76,9 +76,17 @@ pub async fn ws_upgrade(ws: WebSocketUpgrade) -> impl IntoResponse {
 }
 
 pub async fn audio(mut sock: WebSocket) {
+    let mut model = build_model();
+    
+    let mut text_buffer: Vec<String> = Vec::new();
+
     while let Some(Ok(msg)) = sock.recv().await {
         if let Message::Binary(bytes) = msg {
-            println!("got {} audio bytes", bytes.len());
+            let text = transcribe(&mut model, &bytes)
+                .expect("transcription failed");
+
+            text_buffer.push(text.split_whitespace().collect());
+            println!("[text_buffer] {:?}", text_buffer);
         }
     }
 }
